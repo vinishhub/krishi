@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:krishi/widgets/auth_ui.dart';
 
 class LoginScreen extends StatelessWidget {
+  static const String id ='login-screen';
   @override
   Widget build(BuildContext context) {
     return Scaffold(

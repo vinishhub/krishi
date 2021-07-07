@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:krishi/screens/login_screen.dart';
+import 'package:krishi/screens/phoneauth_screen.dart';
 import 'package:krishi/screens/splash_screen.dart';
 
 void main() {
@@ -20,6 +21,10 @@ class MyApp extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return MaterialApp(
               debugShowCheckedModeBanner: false,
+              theme: ThemeData(
+                  primaryColor: Colors.indigo,
+                  fontFamily: 'RobotoSlab-Regular'
+              ),
               home: SplashScreen());
         } else {
           // Loading is done, return the app:
@@ -29,7 +34,14 @@ class MyApp extends StatelessWidget {
                 primaryColor: Colors.indigo,
                 fontFamily: 'RobotoSlab-Regular'
             ),
+
             home: LoginScreen(),
+
+            routes: {
+
+              LoginScreen.id: (context) => LoginScreen(),
+              PhoneAuthScreen.id: (context) => PhoneAuthScreen(),
+            },
           );
         }
       },
