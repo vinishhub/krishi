@@ -7,7 +7,7 @@ class SplashScreen extends StatelessWidget {
 
     const colorizeColors = [
       Colors.blue,
-      Colors.black,
+      Colors.grey,
 
     ];
     const colorizeTextStyle = TextStyle(
