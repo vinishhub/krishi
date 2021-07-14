@@ -1,10 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:krishi/screens/location_screen.dart';
 import 'package:krishi/widgets/auth_ui.dart';
 
 class LoginScreen extends StatelessWidget {
   static const String id ='login-screen';
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Colors.blueAccent.shade400,
       body: Column(

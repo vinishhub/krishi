@@ -1,7 +1,10 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
+import 'package:krishi/services/phoneauth_service.dart';
+import 'package:legacy_progress_dialog/legacy_progress_dialog.dart';
 
 class PhoneAuthScreen extends StatefulWidget {
   static const String id = 'phone-auth-screen';
@@ -15,30 +18,25 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
   var countryCodeController = TextEditingController(text: '+91');
   var phoneNumberController = TextEditingController();
 
-  showAlertDialog(BuildContext context) {
-    AlertDialog alert =AlertDialog(
-      content: Row(
-        children: [
-          CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor)  ,
-          ),
-          SizedBox(width: 8,),
-          Text('Please wait')
-        ],
-      ),
-    );
-    showDialog(
-      barrierDismissible: false,
-        context: context, builder: (BuildContext context){
-      return alert;
-    });
-  }
-  phoneAuthentication(number){
-    print(number);
-  }
+
+
+  PhoneAuthService _service =PhoneAuthService();
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
+    //Create an instance of ProgressDialog
+    ProgressDialog progressDialog = ProgressDialog(
+      context: context,
+      backgroundColor: Colors.white,
+      textColor: Colors.black,
+      loadingText: 'Please wait',
+      progressIndicatorColor: Theme.of(context).primaryColor,
+
+    );
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -133,10 +131,12 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                             Theme.of(context).primaryColor)
                         : MaterialStateProperty.all(Colors.grey)),
                 onPressed: () {
+                  progressDialog.show();
                   String number =
                       '${countryCodeController.text}${phoneNumberController.text}';
-                  showAlertDialog(context);
-                  phoneAuthentication(number);
+                    _service.verifyPhoneNumber(context, number);
+                  //progressDialog.dismiss();
+
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),

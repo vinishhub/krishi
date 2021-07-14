@@ -1,7 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:krishi/screens/location_screen.dart';
 import 'package:krishi/screens/login_screen.dart';
-import 'package:krishi/screens/phoneauth_screen.dart';
+import 'package:krishi/screens/authentication/phoneauth_screen.dart';
 import 'package:krishi/screens/splash_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,7 +16,24 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+       theme: ThemeData(
+           primaryColor: Colors.indigo,
+           fontFamily: 'RobotoSlab-Regular'
+       ),
+      initialRoute: SplashScreen.id,
+      routes:{
+
+        LoginScreen.id: (context) => LoginScreen(),
+        SplashScreen.id: (context) => SplashScreen(),
+
+        PhoneAuthScreen.id: (context) => PhoneAuthScreen(),
+        LocationScreen.id: (context) => LocationScreen(),
+      },
+    )
+
+      /* FutureBuilder(
       // Replace the 3 second delay with your initialization code:
       future: Future.delayed(Duration(seconds: 3)),
       builder: (context, AsyncSnapshot snapshot) {
@@ -43,10 +61,13 @@ class MyApp extends StatelessWidget {
 
               LoginScreen.id: (context) => LoginScreen(),
               PhoneAuthScreen.id: (context) => PhoneAuthScreen(),
+              LocationScreen.id: (context) => LocationScreen(),
             },
           );
         }
       },
-    );
+    );*/ ;
   }
 }
+
+

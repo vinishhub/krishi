@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
-import 'package:krishi/screens/phoneauth_screen.dart';
+import 'package:krishi/screens/authentication/phoneauth_screen.dart';
 class AuthUi extends StatelessWidget {
 
   @override
