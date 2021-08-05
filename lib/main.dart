@@ -1,5 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:krishi/screens/authentication/email_auth_screen.dart';
+import 'package:krishi/screens/authentication/email_verification_screen.dart';
+import 'package:krishi/screens/authentication/reset_password_screen.dart';
+import 'package:krishi/screens/home_screen.dart';
 import 'package:krishi/screens/location_screen.dart';
 import 'package:krishi/screens/login_screen.dart';
 import 'package:krishi/screens/authentication/phoneauth_screen.dart';
@@ -27,9 +31,13 @@ class MyApp extends StatelessWidget {
 
         LoginScreen.id: (context) => LoginScreen(),
         SplashScreen.id: (context) => SplashScreen(),
-
+        HomeScreen.id:(context)=>HomeScreen(),
         PhoneAuthScreen.id: (context) => PhoneAuthScreen(),
         LocationScreen.id: (context) => LocationScreen(),
+        EmailAuthScreen.id: (context) => EmailAuthScreen(),
+        EmailVerificationScreen.id:(context)=>EmailVerificationScreen(),
+        PasswordResetScreen.id:(context)=>PasswordResetScreen(),
+
       },
     )
 

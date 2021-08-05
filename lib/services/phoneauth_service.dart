@@ -10,10 +10,10 @@ class PhoneAuthService {
   User? user = FirebaseAuth.instance.currentUser;
 
   CollectionReference users = FirebaseFirestore.instance.collection('users');
-  Future<void> addUser(context) async {
+  Future<void> addUser(context,uid) async {
 
 
-    final QuerySnapshot result =await users.where('uid',isEqualTo: user!.uid).get();
+    final QuerySnapshot result =await users.where('uid',isEqualTo: uid).get();
     List <DocumentSnapshot>document = result.docs;
 
 
@@ -22,13 +22,12 @@ class PhoneAuthService {
 
     }else{
 
-      return users.doc(user!.uid)
+      return users.doc(user?.uid)
           .set({
-        'uid': user!.uid,
-        'mobile':user!.phoneNumber,
-        'email': user!.email
-      })
-          .then((value){
+        'uid': user?.uid,
+        'mobile':user?.phoneNumber,
+        'email': user?.email
+      }).then((value){
         Navigator.pushReplacementNamed(context, LocationScreen.id);
 
       })
@@ -63,7 +62,7 @@ class PhoneAuthService {
           verificationCompleted: verificationCompleted,
           verificationFailed: verificationFailed,
           codeSent: codeSent,
-          timeout: const Duration(seconds: 60),
+          timeout: const Duration(seconds: 120),
           codeAutoRetrievalTimeout: (String verificationId) {
             print(verificationId);
           });

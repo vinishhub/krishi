@@ -36,7 +36,7 @@ class _OTPScreenState extends State<OTPScreen> {
           verificationId: widget.verId, smsCode: otp);
       final User? user = (await _auth.signInWithCredential(credential)).user;
       if (user != null) {
-        _services.addUser(context);
+        _services.addUser(context,user.uid);
         } else {
         print('Login Failed');
         if(mounted){
