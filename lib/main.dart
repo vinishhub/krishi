@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:krishi/screens/authentication/email_auth_screen.dart';
 import 'package:krishi/screens/authentication/email_verification_screen.dart';
 import 'package:krishi/screens/authentication/reset_password_screen.dart';
+import 'package:krishi/screens/categories/category_list.dart';
+import 'package:krishi/screens/categories/subCat_screen.dart';
 import 'package:krishi/screens/home_screen.dart';
 import 'package:krishi/screens/location_screen.dart';
 import 'package:krishi/screens/login_screen.dart';
@@ -37,6 +39,9 @@ class MyApp extends StatelessWidget {
         EmailAuthScreen.id: (context) => EmailAuthScreen(),
         EmailVerificationScreen.id:(context)=>EmailVerificationScreen(),
         PasswordResetScreen.id:(context)=>PasswordResetScreen(),
+        CategoryListScreen.id:(context)=>CategoryListScreen(),
+        SubCatList.id:(context)=>SubCatList(),
+
 
       },
     )

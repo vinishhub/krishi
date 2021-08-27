@@ -42,6 +42,11 @@ dependencies:
   email_validator: ^1.0.6
   open_mail_app: ^0.2.0
   csc_picker: ^0.2.5
+  flutter_neumorphic: ^3.1.0
+  carousel_slider: ^4.0.0
+  dots_indicator: ^2.0.0
+
+
 
 
 dev_dependencies:

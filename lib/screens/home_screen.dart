@@ -1,15 +1,15 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:geocoder/geocoder.dart';
+import 'package:krishi/widgets/banner_widget.dart';
+import 'package:krishi/widgets/category_widget.dart';
+import 'package:krishi/widgets/custom_appbar.dart';
 import 'package:location/location.dart';
-
-import 'login_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String id = 'home-screen';
   final LocationData? locationData;
+
   HomeScreen({this.locationData});
 
   @override
@@ -18,74 +18,55 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String address = 'India';
-  Future<String> getAddress() async {
-    final coordinates = Coordinates(
-        widget.locationData!.latitude, widget.locationData!.longitude);
-    var addresses =
-        await Geocoder.local.findAddressesFromCoordinates(coordinates);
-    var first = addresses.first;
-    setState(() {
-      address = first.addressLine;
-    });
-
-    return first.addressLine;
-  }
-
-  @override
-  void initState() {
-    getAddress();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0.0,
-        automaticallyImplyLeading: false,
-        title: InkWell(
-          onTap: () {},
-          child: Container(
-            width: MediaQuery.of(context).size.width,
+      appBar: PreferredSize(
+          preferredSize: Size.fromHeight(56),
+          child: SafeArea(child: CustomAppBar())),
+      body: Column(
+        children: [
+          Container(
+            color: Colors.white,
             child: Padding(
-              padding: const EdgeInsets.only(top: 8, bottom: 8),
+              padding: const EdgeInsets.fromLTRB(12,0,12,8),
               child: Row(
                 children: [
-                  Icon(
-                    CupertinoIcons.location_solid,
-                    color: Colors.black,
-                    size: 18,
-                  ),
-                  Flexible(
-                    child: Text(
-                      address,
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold),
+                  Expanded(
+                    child: SizedBox(
+                      height: 40,
+                      child: TextField(
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(
+                              Icons.search,
+                            ),
+                            labelText: 'Find Pesticides,Fertilizers and many more',
+                            labelStyle: TextStyle(fontSize: 12),
+                            contentPadding: EdgeInsets.only(left: 10, right: 10),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(6)),
+                          )),
                     ),
                   ),
-                  Icon(
-                    Icons.keyboard_arrow_down_outlined,
-                    color: Colors.black,
-                    size: 12,
-                  )
+                  SizedBox(width:10,),
+                  Icon(Icons.notifications_none),
+                  SizedBox(width:10,),
                 ],
               ),
             ),
           ),
-        ),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          child: Text('Sign Out'),
-          onPressed: () {
-            FirebaseAuth.instance.signOut().then((value) {
-              Navigator.pushReplacementNamed(context, LoginScreen.id);
-            });
-          },
-        ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(12, 0,12 , 8),
+            child: Column(
+              children: [
+                BannerWidget(),
+                CategoryWidget(),
+
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
