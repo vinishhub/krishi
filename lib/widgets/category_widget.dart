@@ -14,7 +14,7 @@ class CategoryWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Container(
         child: FutureBuilder<QuerySnapshot>(
-          future: _service.categories.get(),
+          future: _service.categories.orderBy('sortId',descending: false).get(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError) {

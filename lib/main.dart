@@ -9,6 +9,7 @@ import 'package:krishi/screens/home_screen.dart';
 import 'package:krishi/screens/location_screen.dart';
 import 'package:krishi/screens/login_screen.dart';
 import 'package:krishi/screens/authentication/phoneauth_screen.dart';
+import 'package:krishi/screens/main_screen.dart';
 import 'package:krishi/screens/splash_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
         PasswordResetScreen.id:(context)=>PasswordResetScreen(),
         CategoryListScreen.id:(context)=>CategoryListScreen(),
         SubCatList.id:(context)=>SubCatList(),
+        MainScreen.id:(context)=>MainScreen(),
 
 
       },
