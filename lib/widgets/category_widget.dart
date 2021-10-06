@@ -26,14 +26,14 @@ class CategoryWidget extends StatelessWidget {
             }
 
             return Container(
-              height: 200,
+              height: 150,
               child: Column(
                 children: [
                   Row(
                     children: [
                       Expanded(
                         child: Text(
-                          'Categories',
+                          'Categories',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black,),
                         ),
                       ),
                       TextButton(

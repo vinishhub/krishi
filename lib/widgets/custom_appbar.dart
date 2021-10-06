@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:krishi/screens/home_screen.dart';
 import 'package:krishi/screens/location_screen.dart';
 import 'package:krishi/services/firebase_service.dart';
 
@@ -48,7 +49,7 @@ class CustomAppBar extends StatelessWidget {
       automaticallyImplyLeading: false,
       title: InkWell(
         onTap: () {
-         Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>LocationScreen(locationChanging: true,),),);
+         Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>LocationScreen(popScreen: HomeScreen.id,),),);
         },
         child: Container(
           width: MediaQuery
@@ -78,6 +79,38 @@ class CustomAppBar extends StatelessWidget {
                   color: Colors.black,
                   size: 12,
                 )
+              ],
+            ),
+          ),
+        ),
+      ),
+      bottom: PreferredSize(
+        preferredSize: Size.fromHeight(56),
+        child: Container(
+          color: Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(12,0,12,8),
+            child: Row(
+              children: [
+                Expanded(
+                  child: SizedBox(
+                    height: 40,
+                    child: TextField(
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(
+                            Icons.search,
+                          ),
+                          labelText: 'Find Pesticides,Fertilizers and many more',
+                          labelStyle: TextStyle(fontSize: 12),
+                          contentPadding: EdgeInsets.only(left: 10, right: 10),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(6)),
+                        )),
+                  ),
+                ),
+                SizedBox(width:10,),
+                Icon(Icons.notifications_none),
+                SizedBox(width:10,),
               ],
             ),
           ),

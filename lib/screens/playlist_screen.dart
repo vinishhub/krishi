@@ -19,7 +19,9 @@ class _PlaylistState extends State<Playlist> {
   void initState() {
     super.initState();
     _initChannel().whenComplete((){
-      setState(() {});
+      if(mounted) {
+        setState(() {});
+      }
     });
   }
 

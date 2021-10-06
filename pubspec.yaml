@@ -47,6 +47,18 @@ dependencies:
   dots_indicator: ^2.0.0
   youtube_player_flutter: ^8.0.0
   http: ^0.13.3
+  provider: ^6.0.0
+  image_picker: ^0.8.4+1
+  firebase_storage: ^10.0.3
+  galleryimage: ^1.1.0
+  like_button: ^2.0.3
+  flutter_svg: ^0.22.0
+  photo_view: ^0.12.0
+  google_maps_flutter: ^2.0.10
+  map_launcher: ^2.1.1
+  url_launcher: ^6.0.12
+
+
 
 
 
@@ -75,7 +87,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-  - assets/images/
+    - assets/images/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -92,15 +104,15 @@ flutter:
   fonts:
     - family: RobotoSlab
       fonts:
-         - asset: assets/fonts/RobotoSlab-Bold.ttf
-         - asset: assets/fonts/RobotoSlab-Regular.ttf
-           weight: 700
-  #         style: italic
+        - asset: assets/fonts/RobotoSlab-Bold.ttf
+        - asset: assets/fonts/RobotoSlab-Regular.ttf
+          weight: 700
+    #         style: italic
     - family: DancingScript
       fonts:
-         - asset: assets/fonts/DancingScript-Regular.ttf
+        - asset: assets/fonts/DancingScript-Regular.ttf
 
-           weight: 700
+          weight: 700
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

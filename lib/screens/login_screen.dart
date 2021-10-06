@@ -1,6 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:krishi/screens/location_screen.dart';
 import 'package:krishi/widgets/auth_ui.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -12,7 +10,7 @@ class LoginScreen extends StatelessWidget {
       backgroundColor: Colors.blueAccent.shade400,
       body: Column(
         children: [
-          Expanded(
+          SingleChildScrollView(
             child: Container(
               width: MediaQuery.of(context).size.width,//device width
               color: Colors.white,

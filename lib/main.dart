@@ -1,5 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:krishi/forms/forms_screen.dart';
+import 'package:krishi/forms/tools_form.dart';
+import 'package:krishi/provider/cat_provider.dart';
+import 'package:krishi/provider/product_provider.dart';
 import 'package:krishi/screens/authentication/email_auth_screen.dart';
 import 'package:krishi/screens/authentication/email_verification_screen.dart';
 import 'package:krishi/screens/authentication/reset_password_screen.dart';
@@ -11,11 +15,23 @@ import 'package:krishi/screens/login_screen.dart';
 import 'package:krishi/screens/authentication/phoneauth_screen.dart';
 import 'package:krishi/screens/main_screen.dart';
 import 'package:krishi/screens/playlist_screen.dart';
+import 'package:krishi/screens/product_details_screen.dart';
+import 'package:krishi/screens/sellitems/seller_category_list.dart';
+import 'package:krishi/screens/sellitems/seller_subCat.dart';
 import 'package:krishi/screens/splash_screen.dart';
+import 'package:krishi/forms/user_review_screen.dart';
+import 'package:provider/provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+  Provider.debugCheckInvalidValueType=null;
+  runApp(
+
+      MultiProvider(providers:[
+        Provider (create: (_) => CategoryProvider()),
+        Provider (create: (_) => ProductProvider()),
+
+      ],child:MyApp(),));
 }
 
 class MyApp extends StatelessWidget {
@@ -45,7 +61,12 @@ class MyApp extends StatelessWidget {
         SubCatList.id:(context)=>SubCatList(),
         MainScreen.id:(context)=>MainScreen(),
         Playlist.id:(context)=>Playlist(),
-
+        SellerSubCatList.id:(context)=>SellerSubCatList(),
+        SellerCategory.id :(context)=>SellerCategory(),
+        SellertoolsForm.id :(context)=>SellertoolsForm(),
+        UserReviewScreen.id:(context)=>UserReviewScreen(),
+        FormsScreen.id:(context)=>FormsScreen(),
+        ProductDetailsScreen.id:(context)=>ProductDetailsScreen(),
 
       },
     )

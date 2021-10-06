@@ -8,23 +8,21 @@ import 'package:geocoder/geocoder.dart';
 import 'package:krishi/services/firebase_service.dart';
 import 'package:legacy_progress_dialog/legacy_progress_dialog.dart';
 import 'package:location/location.dart';
-
-import 'home_screen.dart';
 import 'main_screen.dart';
 
 class LocationScreen extends StatefulWidget {
-  static const String id = 'location-screen';
-  final bool? locationChanging;
 
-  LocationScreen({this.locationChanging});
+  static const String id = 'location-screen';
+  final String? popScreen;
+  const LocationScreen({ this.popScreen});
 
   @override
   State<LocationScreen> createState() => _LocationScreenState();
 }
 
 class _LocationScreenState extends State<LocationScreen> {
-  FirebaseService _service = FirebaseService();
-  Location location = new Location();
+  final FirebaseService _service = FirebaseService();
+  Location? location = Location();
   bool _loading = true;
 
   late bool _serviceEnabled;
@@ -37,30 +35,30 @@ class _LocationScreenState extends State<LocationScreen> {
   String? manualAddress;
 
   Future<LocationData?> getLocation() async {
-    _serviceEnabled = await location.serviceEnabled();
+    _serviceEnabled = await location!.serviceEnabled();
     if (!_serviceEnabled) {
-      _serviceEnabled = await location.requestService();
+      _serviceEnabled = await location!.requestService();
       if (!_serviceEnabled) {
         return null;
       }
     }
 
-    _permissionGranted = await location.hasPermission();
+    _permissionGranted = await location!.hasPermission();
     if (_permissionGranted == PermissionStatus.denied) {
-      _permissionGranted = await location.requestPermission();
+      _permissionGranted = await location!.requestPermission();
       if (_permissionGranted != PermissionStatus.granted) {
         return null;
       }
     }
 
-    _locationData = await location.getLocation();
+    _locationData = await location!.getLocation();
     final coordinates =
-        Coordinates(_locationData.latitude, _locationData.longitude);
+    Coordinates(_locationData.latitude!.toDouble(), _locationData.longitude!.toDouble());
     var addresses =
-        await Geocoder.local.findAddressesFromCoordinates(coordinates);
+    await Geocoder.local.findAddressesFromCoordinates(coordinates);
     var first = addresses.first;
     setState(() {
-      _address = first.addressLine;
+      _address = first.addressLine!;
       countryValue = first.countryName;
     });
 
@@ -69,16 +67,18 @@ class _LocationScreenState extends State<LocationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.locationChanging == null) {
+    if (widget.popScreen == null) {
       _service.users
           .doc(_service.user!.uid)
           .get()
           .then((DocumentSnapshot document) {
         if (document.exists) {
           if (document['address'] != null) {
-            setState(() {
-              _loading = true;
-            });
+            if(mounted){
+              setState(() {
+                _loading=true;
+              });
+            }
             Navigator.pushReplacementNamed(context, MainScreen.id);
           } else {
             setState(() {
@@ -113,12 +113,12 @@ class _LocationScreenState extends State<LocationScreen> {
               builder: (context) {
                 return Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 26,
                     ),
                     AppBar(
                       automaticallyImplyLeading: false,
-                      iconTheme: IconThemeData(
+                      iconTheme: const IconThemeData(
                         color: Colors.black,
                       ),
                       elevation: 1,
@@ -129,12 +129,12 @@ class _LocationScreenState extends State<LocationScreen> {
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            icon: Icon(Icons.clear),
+                            icon: const Icon(Icons.clear),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
-                          Text(
+                          const Text(
                             'Location',
                             style: TextStyle(color: Colors.black),
                           )
@@ -151,7 +151,7 @@ class _LocationScreenState extends State<LocationScreen> {
                         child: SizedBox(
                           height: 40,
                           child: TextFormField(
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               hintText: 'Search City,area or neighbourhood',
                               hintStyle: TextStyle(color: Colors.grey),
                               icon: Icon(Icons.search),
@@ -166,27 +166,28 @@ class _LocationScreenState extends State<LocationScreen> {
                         getLocation().then((value) {
                           if (value != null) {
                             _service.updateUser({
-                              // 'location':GeoPoint(value.latitude,value.longitude),
+                             'location':GeoPoint(value.latitude!.toDouble(),value.longitude!.toDouble()),
                               'address': _address
-                            }, context).then((value) {
-                              Navigator.pushNamed(context, HomeScreen.id);
+                            }, context,widget.popScreen).then((value) {
+                              progressDialog.dismiss();
+                              return Navigator.pushNamed(context,widget.popScreen.toString());
                             });
                           }
                         });
                       },
                       horizontalTitleGap: 0.0,
-                      leading: Icon(
+                      leading: const Icon(
                         Icons.my_location,
                         color: Colors.blue,
                       ),
-                      title: Text(
+                      title: const Text(
                         'Use current location',
                         style: TextStyle(
                             color: Colors.blue, fontWeight: FontWeight.bold),
                       ),
                       subtitle: Text(
                         location == null ? 'Fetching location' : _address,
-                        style: TextStyle(fontSize: 12),
+                        style: const TextStyle(fontSize: 12),
                       ),
                     ),
                     Container(
@@ -194,7 +195,7 @@ class _LocationScreenState extends State<LocationScreen> {
                         color: Colors.grey.shade300,
                         child: Padding(
                           padding:
-                              const EdgeInsets.only(left: 0, bottom: 4, top: 4),
+                          const EdgeInsets.only(left: 0, bottom: 4, top: 4),
                           child: Text(
                             'CHOOSE City',
                             style: TextStyle(
@@ -207,7 +208,7 @@ class _LocationScreenState extends State<LocationScreen> {
                         layout: Layout.vertical,
                         flagState: CountryFlag.DISABLE,
                         dropdownDecoration:
-                            const BoxDecoration(shape: BoxShape.rectangle),
+                        const BoxDecoration(shape: BoxShape.rectangle),
                         defaultCountry: DefaultCountry.India,
                         onCountryChanged: (value) {
                           setState(() {
@@ -223,7 +224,7 @@ class _LocationScreenState extends State<LocationScreen> {
                           setState(() {
                             cityValue = value;
                             manualAddress =
-                                '$cityValue,$stateValue,$countryValue';
+                            '$cityValue,$stateValue,$countryValue';
                           });
                           if (value != null) {
                             _service.updateUser({
@@ -231,7 +232,7 @@ class _LocationScreenState extends State<LocationScreen> {
                               'state': stateValue,
                               'city': cityValue,
                               'country': countryValue
-                            }, context);
+                            }, context,widget.popScreen);
                           }
                         },
                       ),
@@ -251,95 +252,96 @@ class _LocationScreenState extends State<LocationScreen> {
         body: Column(
           children: [
             Image.asset('assets/images/Location.png'),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            Text(
+            const Text(
               'Enter Your Delivery Location',
               textAlign: TextAlign.center,
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
             ),
             _loading
                 ? Column(
-                    children: [
-                      CircularProgressIndicator(),
-                      SizedBox(height: 8),
-                      Text('Finding location...')
-                    ],
-                  )
+              children: const [
+                CircularProgressIndicator(),
+                SizedBox(height: 8),
+                Text('Finding location...')
+              ],
+            )
                 : Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                      left: 20, right: 20, bottom: 10, top: 20),
+                  child: Row(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 20, right: 20, bottom: 10, top: 20),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: _loading
-                                  ? Center(
-                                      child: CircularProgressIndicator(
-                                      valueColor: AlwaysStoppedAnimation<Color>(
-                                          Theme.of(context).primaryColor),
-                                    ))
-                                  : ElevatedButton.icon(
-                                      style: ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStateProperty.all<Color>(
-                                                Theme.of(context).primaryColor),
-                                      ),
-                                      icon: Icon(CupertinoIcons.location_fill),
-                                      label: Padding(
-                                        padding: const EdgeInsets.only(
-                                            top: 15, bottom: 15),
-                                        child: Text(
-                                          "Detect Location",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      onPressed: () {
-                                        progressDialog.show();
-
-                                        getLocation().then((value) {
-                                          if (value != null) {
-                                            _service.updateUser({
-                                              'address': _address,
-                                              //'location':GeoPoint(value.latitude,value.longitude);
-                                            }, context).whenComplete(() {
-                                              progressDialog.dismiss();
-                                            });
-                                          }
-                                        });
-                                      },
-                                    ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          progressDialog.show();
-                          showBottomScreen(context);
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            decoration: const BoxDecoration(
-                              border: Border(bottom: BorderSide(width: 2)),
-                            ),
-                            child: const Text(
-                              "Set Location manually",
+                      Expanded(
+                        child: _loading
+                            ? Center(
+                            child: CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                  Theme.of(context).primaryColor),
+                            ))
+                            : ElevatedButton.icon(
+                          style: ButtonStyle(
+                            backgroundColor:
+                            MaterialStateProperty.all<Color>(
+                                Theme.of(context).primaryColor),
+                          ),
+                          icon: const Icon(CupertinoIcons.location_fill),
+                          label: const Padding(
+                            padding: EdgeInsets.only(
+                                top: 15, bottom: 15),
+                            child: Text(
+                              "Detect Location",
                               style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                              ),
+                                  fontWeight: FontWeight.bold),
                             ),
                           ),
+                          onPressed: () {
+                            progressDialog.show();
+
+                            getLocation().then((value) {
+                              if (value != null) {
+                                _service.updateUser({
+                                  'address': _address,
+                                  'location':GeoPoint(value.latitude!.toDouble(),value.longitude!.toDouble())
+                                }, context,widget.popScreen).whenComplete(() {
+                                  progressDialog.dismiss();
+                                });
+                              }
+                            });
+                          },
                         ),
                       ),
                     ],
-                  )
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    progressDialog.show();
+                    showBottomScreen(context);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        border: Border(bottom: BorderSide(width: 2)),
+                      ),
+                      child: const Text(
+                        "Set Location manually",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            )
           ],
         ));
   }
 }
+

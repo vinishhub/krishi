@@ -50,73 +50,75 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 40,
-            ),
-            CircleAvatar(
-              radius: 30,
-              backgroundColor: Colors.blue.shade200,
-              child: Icon(
-                CupertinoIcons.person_alt_circle,
-                color: Colors.blue,
-                size: 60,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 40,
               ),
-            ),
-            SizedBox(
-              height: 12,
-            ),
-            Text(
-              'Enter your Phone',
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Text(
-              'We will send confirmation code to your Phone Number',
-              style: TextStyle(color: Colors.grey),
-            ),
-            Row(
-              children: [
-                Expanded(
-                    flex: 1,
-                    child: TextFormField(
-                      autofocus: true,
-                      controller: countryCodeController,
-                      enabled: false,
-                      decoration: InputDecoration(
-                          counterText: '00', labelText: 'Country'),
-                    )),
-                SizedBox(
-                  width: 10,
+              CircleAvatar(
+                radius: 30,
+                backgroundColor: Colors.blue.shade200,
+                child: Icon(
+                  CupertinoIcons.person_alt_circle,
+                  color: Colors.blue,
+                  size: 60,
                 ),
-                Expanded(
-                    flex: 3,
-                    child: TextFormField(
-                      onChanged: (value) {
-                        if (value.length == 10) {
-                          setState(() {
-                            validate = true;
-                          });
-                        } if(value.length<10){
-                          validate=false;
-                        }
-                      },
-                      maxLength: 10,
-                      keyboardType: TextInputType.phone,
-                      controller: phoneNumberController,
-                      decoration: InputDecoration(
-                        labelText: 'Number',
-                        hintText: 'Enter your phone number',
-                        hintStyle: TextStyle(fontSize: 10, color: Colors.grey),
-                      ),
-                    )),
-              ],
-            )
-          ],
+              ),
+              SizedBox(
+                height: 12,
+              ),
+              Text(
+                'Enter your Phone',
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                'We will send confirmation code to your Phone Number',
+                style: TextStyle(color: Colors.grey),
+              ),
+              Row(
+                children: [
+                  Expanded(
+                      flex: 1,
+                      child: TextFormField(
+                        autofocus: true,
+                        controller: countryCodeController,
+                        enabled: false,
+                        decoration: InputDecoration(
+                            counterText: '00', labelText: 'Country'),
+                      )),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                      flex: 3,
+                      child: TextFormField(
+                        onChanged: (value) {
+                          if (value.length == 10) {
+                            setState(() {
+                              validate = true;
+                            });
+                          } if(value.length<10){
+                            validate=false;
+                          }
+                        },
+                        maxLength: 10,
+                        keyboardType: TextInputType.phone,
+                        controller: phoneNumberController,
+                        decoration: InputDecoration(
+                          labelText: 'Number',
+                          hintText: 'Enter your phone number',
+                          hintStyle: TextStyle(fontSize: 10, color: Colors.grey),
+                        ),
+                      )),
+                ],
+              )
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: SafeArea(
@@ -135,7 +137,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                   String number =
                       '${countryCodeController.text}${phoneNumberController.text}';
                     _service.verifyPhoneNumber(context, number);
-                  //progressDialog.dismiss();
+                 // progressDialog.dismiss();
 
                 },
                 child: Padding(
