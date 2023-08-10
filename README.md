@@ -1,8 +1,9 @@
-![image](https://github.com/vinishhub/krishi/assets/76252038/2be0f46b-8553-46a1-85cb-d4af504dc2d7)# Krishi - Ecommerce App
+![image](![image](https://github.com/vinishhub/krishi/assets/76252038/d2cef9e4-378c-4aff-a230-986fe6a6f87f))
+# Krishi - Ecommerce App
 
 Krishi is a comprehensive e-commerce app built with Flutter, Dart, and Firebase, empowering users not only to purchase agricultural products but also to become sellers themselves. With an intuitive interface and robust backend, Krishi offers a unique platform for users to both buy and sell agricultural goods.
 
-![Krishi App](web/favicon.png)
+![Krishi App](![image](https://github.com/vinishhub/krishi/assets/76252038/00e2c7df-fd64-4eff-b420-92ed4c8115d3))
 
 ## Features
 
@@ -66,59 +67,53 @@ Contributions are welcome! To contribute to Krishi, follow these steps:
 ## ScreenShots
 
 
-                                            **Splash Screen**
+ **Splash Screen**
                                             
 ![image](https://github.com/vinishhub/krishi/assets/76252038/6a347fad-6208-4a51-8a51-96445066d9ed)
 
 
-
-                                      **User Authentication Screen**     
+**User Authentication Screen**     
                                       
 ![image](https://github.com/vinishhub/krishi/assets/76252038/624f8a0a-4dcf-40f2-bba6-642bfdad1680)
 
 
-                                          **Location Screen**
+**Location Screen**
 
 ![image](https://github.com/vinishhub/krishi/assets/76252038/b48d5a17-c527-4c43-aadc-683beabc8c15)
 
-
-                                          **Manual Location**
+**Manual Location**
 
 ![image](https://github.com/vinishhub/krishi/assets/76252038/116d4b25-9819-4344-a806-018f365937f6)
 
-
-                                            **Home Screen**	
+**Home Screen**	
 
 ![image](https://github.com/vinishhub/krishi/assets/76252038/95ca09fc-cf7b-4d75-8db5-43cf003583f5)
 
-
-                                            **Video Screen**
+**Video Screen**
 
 ![image](https://github.com/vinishhub/krishi/assets/76252038/b6e644a4-aee0-428b-82f7-4d2b596e0ccc)
 
- 
-                                          **User info Screen**
+**User info Screen**
 
 ![image](https://github.com/vinishhub/krishi/assets/76252038/280ef981-2094-47ce-94ce-fb3bac3ca3e4)
 
 
-                                  **Category Screen	Product Detail - 1**
+**Category Screen	Product Detail - 1**
 
 ![image](https://github.com/vinishhub/krishi/assets/76252038/4b293ed6-2a75-4d3b-9f3c-921c0f6c12d3)
 
- 
-                                      **Product Detail - 2**
+
+**Product Detail - 2**
 
 ![image](https://github.com/vinishhub/krishi/assets/76252038/4ec98fac-8917-4001-b70e-357d631535a3)
 
 
-
-                                      **Product Add Form**
+**Product Add Form**
 
 ![image](https://github.com/vinishhub/krishi/assets/76252038/bb0134e5-5eed-414a-baaf-7277c711a597)
 
 
-                                        **Cart Screen**
+**Cart Screen**
 
 ![image](https://github.com/vinishhub/krishi/assets/76252038/b0cc0f1b-38af-4c61-a20d-22c156332bd8)
 
