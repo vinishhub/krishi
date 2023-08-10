@@ -1,6 +1,5 @@
 <p align="center">
-  <img src="![image](https://github.com/vinishhub/krishi/assets/76252038/4514a915-17df-4385-a4db-2af624f12ac5)
-" alt="Krishi App" width="300">
+  <img src="https://github.com/vinishhub/krishi/assets/76252038/4514a915-17df-4385-a4db-2af624f12ac5" alt="Krishi App" width="300">
 </p>
 
 # Krishi - Ecommerce App
