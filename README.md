@@ -10,7 +10,7 @@ Krishi is a comprehensive e-commerce app built with Flutter, Dart, and Firebase,
   <img src="https://github.com/vinishhub/krishi/assets/76252038/4514a915-17df-4385-a4db-2af624f12ac5" alt="Krishi App" width="100">
 </p>
 
-<p float="left">
+<p align="middle">
 
 <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white"/>
 <img src="https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white"/>
