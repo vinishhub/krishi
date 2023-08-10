@@ -1,4 +1,4 @@
-![image](![image](https://github.com/vinishhub/krishi/assets/76252038/d2cef9e4-378c-4aff-a230-986fe6a6f87f))
+![image](https://github.com/vinishhub/krishi/assets/76252038/529f4928-ca75-48ea-89eb-2511e14c3220)
 # Krishi - Ecommerce App
 
 Krishi is a comprehensive e-commerce app built with Flutter, Dart, and Firebase, empowering users not only to purchase agricultural products but also to become sellers themselves. With an intuitive interface and robust backend, Krishi offers a unique platform for users to both buy and sell agricultural goods.
